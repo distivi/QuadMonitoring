@@ -1,5 +1,5 @@
 //
-//  ServerManager.h
+//  DataManager.h
 //  QuadMonitoring
 //
 //  Created by Stanislav Dymedyuk on 1/15/16.
@@ -9,17 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "Constants.h"
 
-typedef void (^NetworkStatus)(BOOL available);
-
-@interface ServerManager : NSObject
-
-@property (nonatomic, strong) NSString *hostForDataCenter;
-@property (nonatomic, strong) NSString *hostForMonitoringTransmitter;
+@interface DataManager : NSObject
 
 - (void)getAvailableMonitoringObjectsWithCallBack:(CompletitionBlock)completition;
 - (void)getLastInfoForMonitoringObject:(NSString *)objectID callBack:(CompletitionBlock)completition;
-
-//Network Reachibility Status
-+ (void)checkNetworkReachabilityStatus:(NetworkStatus)networkBlock;
 
 @end

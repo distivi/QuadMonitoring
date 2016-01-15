@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B65098D36193EF23DBBD8C6C /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AB9F6EA39240B98D1439371 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		F65B919A1C2329A300380DDB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F65B91991C2329A300380DDB /* main.m */; };
 		F65B919D1C2329A300380DDB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F65B919C1C2329A300380DDB /* AppDelegate.m */; };
 		F65B91A31C2329A300380DDB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F65B91A11C2329A300380DDB /* Main.storyboard */; };
@@ -20,6 +21,12 @@
 		F6C524681C49084000FE9C30 /* BaseAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = F6C524671C49084000FE9C30 /* BaseAnnotation.m */; };
 		F6C5246C1C49085500FE9C30 /* Engine.m in Sources */ = {isa = PBXBuildFile; fileRef = F6C5246B1C49085500FE9C30 /* Engine.m */; };
 		F6C5246F1C49086100FE9C30 /* ServerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F6C5246E1C49086100FE9C30 /* ServerManager.m */; };
+		F6C524721C4931DA00FE9C30 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F6C524711C4931DA00FE9C30 /* DataManager.m */; };
+		F6C524771C493DD000FE9C30 /* BaseParser.m in Sources */ = {isa = PBXBuildFile; fileRef = F6C524761C493DD000FE9C30 /* BaseParser.m */; };
+		F6C5247B1C493F5600FE9C30 /* StringListParser.m in Sources */ = {isa = PBXBuildFile; fileRef = F6C5247A1C493F5600FE9C30 /* StringListParser.m */; };
+		F6C5247F1C4944CB00FE9C30 /* NSDictionary+Safe.m in Sources */ = {isa = PBXBuildFile; fileRef = F6C5247E1C4944CB00FE9C30 /* NSDictionary+Safe.m */; };
+		F6C524821C49453200FE9C30 /* CommonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = F6C524811C49453200FE9C30 /* CommonParser.m */; };
+		F6C524851C4949C200FE9C30 /* MonitoringObjectParser.m in Sources */ = {isa = PBXBuildFile; fileRef = F6C524841C4949C200FE9C30 /* MonitoringObjectParser.m */; };
 		F6C6277B1C3053010049989E /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6C6277A1C3053010049989E /* MapViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -34,6 +41,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		02764555D3503E8B18AB714B /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		0A8118D03EB40E6E853B36D9 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		7AB9F6EA39240B98D1439371 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F65B91951C2329A300380DDB /* QuadMonitoring.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuadMonitoring.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F65B91991C2329A300380DDB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F65B919B1C2329A300380DDB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -58,6 +68,20 @@
 		F6C5246B1C49085500FE9C30 /* Engine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Engine.m; sourceTree = "<group>"; };
 		F6C5246D1C49086100FE9C30 /* ServerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerManager.h; sourceTree = "<group>"; };
 		F6C5246E1C49086100FE9C30 /* ServerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerManager.m; sourceTree = "<group>"; };
+		F6C524701C4931DA00FE9C30 /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
+		F6C524711C4931DA00FE9C30 /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
+		F6C524731C49329E00FE9C30 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		F6C524741C493DD000FE9C30 /* ParseProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParseProtocol.h; sourceTree = "<group>"; };
+		F6C524751C493DD000FE9C30 /* BaseParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseParser.h; sourceTree = "<group>"; };
+		F6C524761C493DD000FE9C30 /* BaseParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseParser.m; sourceTree = "<group>"; };
+		F6C524791C493F5600FE9C30 /* StringListParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringListParser.h; sourceTree = "<group>"; };
+		F6C5247A1C493F5600FE9C30 /* StringListParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StringListParser.m; sourceTree = "<group>"; };
+		F6C5247D1C4944CB00FE9C30 /* NSDictionary+Safe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Safe.h"; sourceTree = "<group>"; };
+		F6C5247E1C4944CB00FE9C30 /* NSDictionary+Safe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Safe.m"; sourceTree = "<group>"; };
+		F6C524801C49453200FE9C30 /* CommonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonParser.h; sourceTree = "<group>"; };
+		F6C524811C49453200FE9C30 /* CommonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonParser.m; sourceTree = "<group>"; };
+		F6C524831C4949C200FE9C30 /* MonitoringObjectParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MonitoringObjectParser.h; sourceTree = "<group>"; };
+		F6C524841C4949C200FE9C30 /* MonitoringObjectParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MonitoringObjectParser.m; sourceTree = "<group>"; };
 		F6C627791C3053010049989E /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
 		F6C6277A1C3053010049989E /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -68,6 +92,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F65B91BE1C232C1C00380DDB /* MapKit.framework in Frameworks */,
+				B65098D36193EF23DBBD8C6C /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +106,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9D3703B1F075F3B2F6C963FC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7AB9F6EA39240B98D1439371 /* Pods.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EA8AEAFE606886E3DEF50EDC /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0A8118D03EB40E6E853B36D9 /* Pods.debug.xcconfig */,
+				02764555D3503E8B18AB714B /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		F65B918C1C2329A300380DDB = {
 			isa = PBXGroup;
 			children = (
@@ -88,6 +130,8 @@
 				F65B91971C2329A300380DDB /* QuadMonitoring */,
 				F65B91B11C2329A300380DDB /* QuadMonitoringTests */,
 				F65B91961C2329A300380DDB /* Products */,
+				EA8AEAFE606886E3DEF50EDC /* Pods */,
+				9D3703B1F075F3B2F6C963FC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -103,6 +147,9 @@
 		F65B91971C2329A300380DDB /* QuadMonitoring */ = {
 			isa = PBXGroup;
 			children = (
+				F6C524731C49329E00FE9C30 /* Constants.h */,
+				F6C5247C1C4944B700FE9C30 /* Extansions */,
+				F6C524781C493DD600FE9C30 /* Parsers */,
 				F6C524691C49084A00FE9C30 /* Managers */,
 				F6C524621C49080800FE9C30 /* Models */,
 				F65D92451C31945F0062ED34 /* Annotations */,
@@ -164,8 +211,35 @@
 				F6C5246B1C49085500FE9C30 /* Engine.m */,
 				F6C5246D1C49086100FE9C30 /* ServerManager.h */,
 				F6C5246E1C49086100FE9C30 /* ServerManager.m */,
+				F6C524701C4931DA00FE9C30 /* DataManager.h */,
+				F6C524711C4931DA00FE9C30 /* DataManager.m */,
 			);
 			name = Managers;
+			sourceTree = "<group>";
+		};
+		F6C524781C493DD600FE9C30 /* Parsers */ = {
+			isa = PBXGroup;
+			children = (
+				F6C524741C493DD000FE9C30 /* ParseProtocol.h */,
+				F6C524751C493DD000FE9C30 /* BaseParser.h */,
+				F6C524761C493DD000FE9C30 /* BaseParser.m */,
+				F6C524801C49453200FE9C30 /* CommonParser.h */,
+				F6C524811C49453200FE9C30 /* CommonParser.m */,
+				F6C524791C493F5600FE9C30 /* StringListParser.h */,
+				F6C5247A1C493F5600FE9C30 /* StringListParser.m */,
+				F6C524831C4949C200FE9C30 /* MonitoringObjectParser.h */,
+				F6C524841C4949C200FE9C30 /* MonitoringObjectParser.m */,
+			);
+			name = Parsers;
+			sourceTree = "<group>";
+		};
+		F6C5247C1C4944B700FE9C30 /* Extansions */ = {
+			isa = PBXGroup;
+			children = (
+				F6C5247D1C4944CB00FE9C30 /* NSDictionary+Safe.h */,
+				F6C5247E1C4944CB00FE9C30 /* NSDictionary+Safe.m */,
+			);
+			name = Extansions;
 			sourceTree = "<group>";
 		};
 		F6C627781C3052EF0049989E /* Controllers */ = {
@@ -184,9 +258,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F65B91B71C2329A300380DDB /* Build configuration list for PBXNativeTarget "QuadMonitoring" */;
 			buildPhases = (
+				984D6A57FAB9C46893A674F4 /* Check Pods Manifest.lock */,
 				F65B91911C2329A300380DDB /* Sources */,
 				F65B91921C2329A300380DDB /* Frameworks */,
 				F65B91931C2329A300380DDB /* Resources */,
+				F09A14FDA38215A43E5F2BFA /* Copy Pods Resources */,
+				F55B2F46474D9C970874DDDB /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -226,6 +303,7 @@
 				TargetAttributes = {
 					F65B91941C2329A300380DDB = {
 						CreatedOnToolsVersion = 7.0.1;
+						DevelopmentTeam = 36CLWK4HAE;
 						SystemCapabilities = {
 							com.apple.Maps.iOS = {
 								enabled = 1;
@@ -277,18 +355,72 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		984D6A57FAB9C46893A674F4 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		F09A14FDA38215A43E5F2BFA /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F55B2F46474D9C970874DDDB /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		F65B91911C2329A300380DDB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				F6C6277B1C3053010049989E /* MapViewController.m in Sources */,
+				F6C524721C4931DA00FE9C30 /* DataManager.m in Sources */,
 				F6C5246C1C49085500FE9C30 /* Engine.m in Sources */,
+				F6C5247F1C4944CB00FE9C30 /* NSDictionary+Safe.m in Sources */,
 				F65B919D1C2329A300380DDB /* AppDelegate.m in Sources */,
 				F65B919A1C2329A300380DDB /* main.m in Sources */,
 				F65D92481C3194930062ED34 /* DroneAnnotation.m in Sources */,
+				F6C524821C49453200FE9C30 /* CommonParser.m in Sources */,
+				F6C524771C493DD000FE9C30 /* BaseParser.m in Sources */,
+				F6C524851C4949C200FE9C30 /* MonitoringObjectParser.m in Sources */,
 				F6C524651C49082100FE9C30 /* MonitoringObject.m in Sources */,
 				F6C5246F1C49086100FE9C30 /* ServerManager.m in Sources */,
+				F6C5247B1C493F5600FE9C30 /* StringListParser.m in Sources */,
 				F6C524681C49084000FE9C30 /* BaseAnnotation.m in Sources */,
 				F65D924B1C31981E0062ED34 /* DrawUtils.m in Sources */,
 			);
@@ -416,25 +548,31 @@
 		};
 		F65B91B81C2329A300380DDB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0A8118D03EB40E6E853B36D9 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = QuadMonitoring/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = distvi.QuadMonitoring;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
 		F65B91B91C2329A300380DDB /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 02764555D3503E8B18AB714B /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = QuadMonitoring/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = distvi.QuadMonitoring;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

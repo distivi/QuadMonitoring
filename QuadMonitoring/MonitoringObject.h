@@ -22,7 +22,10 @@
 
 @property (nonatomic, strong) NSString *identifier;
 @property (nonatomic, strong) BaseAnnotation *annotation;
+@property (nonatomic, strong) NSMutableArray *movingPoints;
 @property (nonatomic, weak) id<MonitoringObjectDelegate> delegate;
+
+- (instancetype)initWithIdentifier:(NSString *)identifier;
 
 - (void)startMonitoring;
 - (void)stopMonitoring;

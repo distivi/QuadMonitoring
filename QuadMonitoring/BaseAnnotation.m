@@ -10,4 +10,27 @@
 
 @implementation BaseAnnotation
 
+- (instancetype)initWithName:(NSString *)name info:(NSString *)info coordinate:(CLLocationCoordinate2D)coordinate
+{
+    if ((self = [super init])) {
+        self.name = name;
+        self.info = info;
+        self.theCoordinate = coordinate;
+    }
+    return self;
+}
+
+- (NSString *)title {
+    return _name;
+}
+
+- (NSString *)subtitle {
+    return _info;
+}
+
+- (CLLocationCoordinate2D)coordinate {
+    return _theCoordinate;
+}
+
+
 @end

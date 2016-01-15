@@ -29,4 +29,12 @@
     return _serverManager;
 }
 
+- (DataManager *)dataManager
+{
+    if (!_dataManager) {
+        _dataManager = [DataManager new];
+    }
+    return _dataManager;
+}
+
 @end

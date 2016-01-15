@@ -19,4 +19,6 @@
 
 @property (nonatomic, weak) MonitoringObject *monitoringObject;
 
+- (instancetype)initWithName:(NSString *)name info:(NSString *)info coordinate:(CLLocationCoordinate2D)coordinate;
+
 @end

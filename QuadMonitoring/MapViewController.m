@@ -10,10 +10,13 @@
 #import <MapKit/MapKit.h>
 #import "DroneAnnotation.h"
 #import "DrawUtils.h"
+#import "MonitoringObject.h"
+#import "Engine.h"
+#import "BaseAnnotation.h"
 
 // https://github.com/100grams/Moving-MKAnnotationView
 
-@interface MapViewController ()<CLLocationManagerDelegate>
+@interface MapViewController ()<CLLocationManagerDelegate,MonitoringObjectDelegate>
 
 @property (nonatomic, strong) NSArray *testCoords;
 @property (nonatomic) NSInteger currentPositionIndex;
@@ -25,6 +28,8 @@
 @property (nonatomic, weak) IBOutlet MKMapView *mapView;
 @property (nonatomic, weak) IBOutlet UISwitch *followMeSwitch;
 
+@property (nonatomic, strong) NSMutableArray *monitoringObjects;
+
 @end
 
 @implementation MapViewController
@@ -33,36 +38,38 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setupLocationManager];
+    [self setupMonitoringObjects];
 }
 
-- (void)viewDidAppear:(BOOL)animated
+- (void)viewDidDisappear:(BOOL)animated
 {
-    [super viewDidAppear:animated];
-    
-    [self moveToTestPoint];
-    [self setupTestDrone];
+    [self.monitoringObjects makeObjectsPerformSelector:@selector(stopMonitoring)];
+    [super viewDidDisappear:animated];
 }
 
 #pragma mark - Setup methods
 
-- (void)setupTestDrone
+- (void)setupMonitoringObjects
 {
-    CLLocationCoordinate2D coord1 = CLLocationCoordinate2DMake(46.971447, 32.014508);
-    CLLocationCoordinate2D coord2 = CLLocationCoordinate2DMake(46.972307, 32.014188);
-    CLLocationCoordinate2D coord3 = CLLocationCoordinate2DMake(46.972471, 32.010448);
-    CLLocationCoordinate2D coord4 = CLLocationCoordinate2DMake(46.971170, 32.010905);
+    self.monitoringObjects = [NSMutableArray array];
     
-    self.testDroneAnnotation = [[DroneAnnotation alloc] initWithName:@"Bot Drone" info:@"Test flight" coordinate:coord1];
-    [self.mapView addAnnotation:self.testDroneAnnotation];
-
-    self.testCoords = @[[NSValue valueWithMKCoordinate:coord1],
-                        [NSValue valueWithMKCoordinate:coord2],
-                        [NSValue valueWithMKCoordinate:coord3],
-                        [NSValue valueWithMKCoordinate:coord4]];
-    self.currentPositionIndex = 0;
-    
-    [self updateTestDronePosition];
+    [[[Engine sharedEngine] dataManager] getAvailableMonitoringObjectsWithCallBack:^(BOOL success, id result) {
+        if (success) {
+            NSArray *objectsIds = result;
+            for (NSString *identifier in objectsIds) {
+                MonitoringObject *mo = [[MonitoringObject alloc] initWithIdentifier:identifier];
+                mo.delegate = self;
+                [self.monitoringObjects addObject:mo];
+                [self.mapView addAnnotation:mo.annotation];
+                
+                [mo startMonitoring];
+            }
+        } else {
+            NSLog(@"error: %@",result);
+        }
+    }];
 }
+
 
 - (void)setupLocationManager
 {
@@ -104,25 +111,6 @@
     [self.mapView setRegion:region animated:YES];
 }
 
-- (void)updateTestDronePosition
-{
-    
-    if(++self.currentPositionIndex == self.testCoords.count)
-        self.currentPositionIndex = 0;
-    
-    NSValue *coordValue = self.testCoords[self.currentPositionIndex];
-    CLLocationCoordinate2D coord = [coordValue MKCoordinateValue];
-    [self.testDroneAnnotation updatePosition:coord];
-    CGPoint toPos = [self.mapView convertCoordinate:coord toPointToView:self.mapView];
-    
-    [UIView animateWithDuration:2.0 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
-        self.testDroneView.center = toPos;
-    } completion:^(BOOL finished) {
-        if (finished) {
-            [self updateTestDronePosition];
-        }
-    }];
-}
 
 
 #pragma mark - IBActions
@@ -158,25 +146,40 @@
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
     static NSString *identifier = @"Drone";
-    if ([annotation isKindOfClass:[DroneAnnotation class]]) {
+    
+    
+    MKAnnotationView *annotationView = (MKAnnotationView *) [_mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
+    if (annotationView == nil) {
+        annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
+        annotationView.enabled = YES;
+        annotationView.canShowCallout = YES;
+        UIImage *image = [DrawUtils droneImage];
+        annotationView.image = image;
         
-        MKAnnotationView *annotationView = (MKAnnotationView *) [_mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
-        if (annotationView == nil) {
-            annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
-            annotationView.enabled = YES;
-            annotationView.canShowCallout = YES;
-            UIImage *image = [DrawUtils droneImage];
-            annotationView.image = image;
-            
-            self.testDroneView = annotationView;
-        } else {
-            annotationView.annotation = annotation;
-        }
-        
-        return annotationView;
+        self.testDroneView = annotationView;
+    } else {
+        annotationView.annotation = annotation;
     }
     
-    return nil;
+    return annotationView;
+    
+}
+
+#pragma mark - MonitoringObjectDelegate
+
+- (void)monitoringObject:(MonitoringObject *)sender didChangePosition:(CLLocationCoordinate2D)coordinate
+{
+    [UIView animateWithDuration:0.5 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+        // there should be view animation
+        
+        MKAnnotationView *annotationView = [self.mapView viewForAnnotation:sender.annotation];
+        if (CLLocationCoordinate2DIsValid(coordinate)) {
+            CGPoint point = [self.mapView convertCoordinate:coordinate toPointToView:self.mapView];
+            NSLog(@"point: %@",NSStringFromCGPoint(point));
+            annotationView.center = point;
+        }
+        
+    } completion:nil];
 }
 
 @end
