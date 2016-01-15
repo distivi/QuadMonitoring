@@ -1,15 +1,15 @@
 //
-//  ViewController.h
+//  DrawUtils.h
 //  QuadMonitoring
 //
-//  Created by Stanislav Dymedyuk on 12/17/15.
+//  Created by Stanislav Dymedyuk on 12/28/15.
 //  Copyright © 2015 Stanislav Dymedyuk. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface DrawUtils : NSObject
 
++ (UIImage *)droneImage;
 
 @end
-
