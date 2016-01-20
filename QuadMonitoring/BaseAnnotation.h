@@ -17,6 +17,7 @@
 @property (nonatomic, copy) NSString *info;
 @property (nonatomic, assign) CLLocationCoordinate2D theCoordinate;
 
+@property (nonatomic, strong, readonly) UIImage *icon;
 @property (nonatomic, weak) MonitoringObject *monitoringObject;
 
 - (instancetype)initWithName:(NSString *)name info:(NSString *)info coordinate:(CLLocationCoordinate2D)coordinate;

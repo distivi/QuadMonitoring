@@ -7,11 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <MapKit/MapKit.h>
+#import "BaseAnnotation.h"
 
-@interface DroneAnnotation : NSObject <MKAnnotation>
-
-- (instancetype)initWithName:(NSString *)name info:(NSString *)info coordinate:(CLLocationCoordinate2D)coordinate;
-- (void)updatePosition:(CLLocationCoordinate2D)coordinate;
+@interface DroneAnnotation : BaseAnnotation
 
 @end

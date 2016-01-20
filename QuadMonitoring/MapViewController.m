@@ -53,21 +53,7 @@
 {
     self.monitoringObjects = [NSMutableArray array];
     
-    [[[Engine sharedEngine] dataManager] getAvailableMonitoringObjectsWithCallBack:^(BOOL success, id result) {
-        if (success) {
-            NSArray *objectsIds = result;
-            for (NSString *identifier in objectsIds) {
-                MonitoringObject *mo = [[MonitoringObject alloc] initWithIdentifier:identifier];
-                mo.delegate = self;
-                [self.monitoringObjects addObject:mo];
-                [self.mapView addAnnotation:mo.annotation];
-                
-                [mo startMonitoring];
-            }
-        } else {
-            NSLog(@"error: %@",result);
-        }
-    }];
+    
 }
 
 
@@ -147,14 +133,14 @@
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
     static NSString *identifier = @"Drone";
     
-    
     MKAnnotationView *annotationView = (MKAnnotationView *) [_mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
     if (annotationView == nil) {
         annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
         annotationView.enabled = YES;
         annotationView.canShowCallout = YES;
-        UIImage *image = [DrawUtils droneImage];
+        UIImage *image = [(BaseAnnotation *)annotation icon];
         annotationView.image = image;
+        annotationView.layer.anchorPoint = CGPointMake(0.5, 1);
         
         self.testDroneView = annotationView;
     } else {
@@ -169,17 +155,17 @@
 
 - (void)monitoringObject:(MonitoringObject *)sender didChangePosition:(CLLocationCoordinate2D)coordinate
 {
-    [UIView animateWithDuration:0.5 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
-        // there should be view animation
-        
-        MKAnnotationView *annotationView = [self.mapView viewForAnnotation:sender.annotation];
-        if (CLLocationCoordinate2DIsValid(coordinate)) {
-            CGPoint point = [self.mapView convertCoordinate:coordinate toPointToView:self.mapView];
-            NSLog(@"point: %@",NSStringFromCGPoint(point));
-            annotationView.center = point;
-        }
-        
-    } completion:nil];
+//    [UIView animateWithDuration:0.5 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+//        // there should be view animation
+//        
+//        MKAnnotationView *annotationView = [self.mapView viewForAnnotation:sender.annotation];
+//        if (CLLocationCoordinate2DIsValid(coordinate)) {
+//            CGPoint point = [self.mapView convertCoordinate:coordinate toPointToView:self.mapView];
+//            NSLog(@"point: %@",NSStringFromCGPoint(point));
+//            annotationView.center = point;
+//        }
+//        
+//    } completion:nil];
 }
 
 @end

@@ -37,4 +37,12 @@
     return _dataManager;
 }
 
+- (SettingsManager *)settingsManager
+{
+    if (!_settingsManager) {
+        _settingsManager = [SettingsManager new];
+    }
+    return _settingsManager;
+}
+
 @end

@@ -11,15 +11,17 @@
 @interface CommonParser()
 
 @property (nonatomic, strong) BaseParser *parser;
+@property (nonatomic) BOOL isList;
 
 @end
 
 @implementation CommonParser
 
-+ (instancetype)parserWithModelParser:(BaseParser *)parser
++ (instancetype)parserWithModelParser:(BaseParser *)parser toParseList:(BOOL)isList
 {
     CommonParser *commonParser = [CommonParser new];
     commonParser.parser = parser;
+    commonParser.isList = isList;
     return commonParser;
 }
 
@@ -30,7 +32,21 @@
     id data = [json safeObjectForKey:@"data"];
     
     if (success) {
-        [self.parser parseJSON:data withResult:result];
+        if (self.isList) {
+            NSMutableArray *objects = [NSMutableArray array];
+            
+            for (NSDictionary *jsonObject in data) {
+                [self.parser parseJSON:jsonObject withResult:^(id object, NSError *error) {
+                    if (!error) {
+                        [objects addObject:object];
+                    }
+                }];
+                
+                result(objects,nil);
+            }            
+        } else {
+            [self.parser parseJSON:data withResult:result];
+        }
     } else {
         NSError *error = errorMessage ? [NSError errorWithDomain:ErrorDomain code:ErrorTypeResponseWithError userInfo:@{ErrorMessage: errorMessage}] : nil;
         result(nil,error);

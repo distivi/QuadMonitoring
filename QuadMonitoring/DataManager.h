@@ -9,9 +9,19 @@
 #import <Foundation/Foundation.h>
 #import "Constants.h"
 
+@class Drone;
+@class Route;
+@class Sensor;
+@class SensorValue;
+@class Command;
+
 @interface DataManager : NSObject
 
-- (void)getAvailableMonitoringObjectsWithCallBack:(CompletitionBlock)completition;
-- (void)getLastInfoForMonitoringObject:(NSString *)objectID callBack:(CompletitionBlock)completition;
+- (void)getDronesWithCallback:(CompletitionBlock)completition;
+- (void)getCommandsForDrone:(Drone *)dron withCallback:(CompletitionBlock)completition;
+- (void)getRoutesForDrone:(Drone *)dron withCallback:(CompletitionBlock)completition;
+- (void)getSensorForDrone:(Drone *)dron withCallback:(CompletitionBlock)completition;
+- (void)getValuesForSensor:(Sensor *)sensor withCallback:(CompletitionBlock)completition;
+
 
 @end

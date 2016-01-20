@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <MapKit/MapKit.h>
+#import "Constants.h"
 
 @class BaseAnnotation;
 @class MonitoringObject;
@@ -25,7 +26,9 @@
 @property (nonatomic, strong) NSMutableArray *movingPoints;
 @property (nonatomic, weak) id<MonitoringObjectDelegate> delegate;
 
-- (instancetype)initWithIdentifier:(NSString *)identifier;
+@property (nonatomic, assign) DroneType annotationsType;
+
+- (instancetype)initWithIdentifier:(NSString *)identifier annotationsType:(DroneType)annotationsType;
 
 - (void)startMonitoring;
 - (void)stopMonitoring;

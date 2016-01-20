@@ -10,6 +10,6 @@
 
 @interface CommonParser : BaseParser
 
-+ (instancetype)parserWithModelParser:(BaseParser *)parser;
++ (instancetype)parserWithModelParser:(BaseParser *)parser toParseList:(BOOL)isList;
 
 @end

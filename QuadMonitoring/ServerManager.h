@@ -16,8 +16,20 @@ typedef void (^NetworkStatus)(BOOL available);
 @property (nonatomic, strong) NSString *hostForDataCenter;
 @property (nonatomic, strong) NSString *hostForMonitoringTransmitter;
 
-- (void)getAvailableMonitoringObjectsWithCallBack:(CompletitionBlock)completition;
-- (void)getLastInfoForMonitoringObject:(NSString *)objectID callBack:(CompletitionBlock)completition;
+@property (nonatomic, strong) NSString *accessToken;
+
+- (void)login:(NSString *)email andPassword:(NSString *)password withCallback:(CompletitionBlock)completition;
+
+#pragma mark - GET
+
+- (void)getCommandForDrone:(NSInteger)dronID withCallback:(CompletitionBlock)completition;
+- (void)getDroneForDrone:(NSInteger)dronID withCallback:(CompletitionBlock)completition;
+- (void)getRouteForDrone:(NSInteger)dronID withCallback:(CompletitionBlock)completition;
+- (void)getSensorForDrone:(NSInteger)dronID withCallback:(CompletitionBlock)completition;
+- (void)getValuesForSensor:(NSInteger)sensorID withCallback:(CompletitionBlock)completition;
+- (void)getAvailableDrones:(BOOL)isAvailable withCallback:(CompletitionBlock)completition;
+- (void)getDronesWithStatusActive:(BOOL)isActive withCallback:(CompletitionBlock)completition;
+- (void)getDronesForType:(DroneType)droneType withCallback:(CompletitionBlock)completition;
 
 //Network Reachibility Status
 + (void)checkNetworkReachabilityStatus:(NetworkStatus)networkBlock;

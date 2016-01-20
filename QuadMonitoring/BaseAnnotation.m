@@ -32,5 +32,10 @@
     return _theCoordinate;
 }
 
+- (UIImage *)icon
+{
+    return nil;
+}
+
 
 @end

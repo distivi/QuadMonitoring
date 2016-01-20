@@ -8,40 +8,100 @@
 
 #import "ServerManager.h"
 #import <AFNetworking/AFNetworking.h>
+#import "NSDictionary+Safe.h"
 
 #define TEST
 
 @implementation ServerManager
 
-- (void)getAvailableMonitoringObjectsWithCallBack:(CompletitionBlock)completition
+
+- (void)login:(NSString *)email andPassword:(NSString *)password withCallback:(CompletitionBlock)completition
 {
-#ifdef TEST
-    NSDictionary *json = @{@"success": @(YES),@"data": @[@"id1",@"id2",@"id3",@"id4"]};
-    completition(YES, json);
-#else
-    NSString *apiCall = @"monitoringObjects";
-    [self commonGETRequestWithApiCall:apiCall callBack:completition];
-#endif
+    [self getAccessTokenWithEmail:email andPassword:password completition:completition];
 }
 
-- (void)getLastInfoForMonitoringObject:(NSString *)objectID callBack:(CompletitionBlock)completition
+#pragma mark GET
+
+- (void)getCommandForDrone:(NSInteger)dronID withCallback:(CompletitionBlock)completition
 {
-#ifdef TEST
-    double lat = 46.972307 + 0.0001 * (double)(arc4random() % 100 - 50);
-    double lon = 32.014188 + 0.0001 * (double)(arc4random() % 100 - 50);
-    NSDictionary *json = @{@"success": @(YES),@"data": @{@"lat": @(lat),@"lon": @(lon)}};
-    completition(YES, json);
-#else
-    NSString *apiCall = FORMAT(@"info/dron/%@",objectID);
+    NSString *droneName = dronID != 0 ? [@(dronID) stringValue] : nil;
+    NSString *apiCall = [NSString stringWithFormat:@"/get/command/%@",droneName];
     [self commonGETRequestWithApiCall:apiCall callBack:completition];
-#endif
 }
+
+- (void)getDroneForDrone:(NSInteger)dronID withCallback:(CompletitionBlock)completition
+{
+    NSString *droneName = dronID != 0 ? [@(dronID) stringValue] : nil;
+    NSString *apiCall = [NSString stringWithFormat:@"/get/drone/%@",droneName];
+    [self commonGETRequestWithApiCall:apiCall callBack:completition];
+}
+
+- (void)getRouteForDrone:(NSInteger)dronID withCallback:(CompletitionBlock)completition
+{
+    NSString *droneName = dronID != 0 ? [@(dronID) stringValue] : nil;
+    NSString *apiCall = [NSString stringWithFormat:@"/get/route/%@",droneName];
+    [self commonGETRequestWithApiCall:apiCall callBack:completition];
+}
+
+- (void)getSensorForDrone:(NSInteger)dronID withCallback:(CompletitionBlock)completition
+{
+    NSString *droneName = dronID != 0 ? [@(dronID) stringValue] : nil;
+    NSString *apiCall = [NSString stringWithFormat:@"/get/sensor/%@",droneName];
+    [self commonGETRequestWithApiCall:apiCall callBack:completition];
+}
+
+- (void)getValuesForSensor:(NSInteger)sensorID withCallback:(CompletitionBlock)completition
+{
+    NSString *sensorName = sensorID != 0 ? [@(sensorID) stringValue] : nil;
+    NSString *apiCall = [NSString stringWithFormat:@"/get/values/%@",sensorName];
+    [self commonGETRequestWithApiCall:apiCall callBack:completition];
+}
+
+- (void)getAvailableDrones:(BOOL)isAvailable withCallback:(CompletitionBlock)completition
+{
+    NSString *apiCall = [NSString stringWithFormat:@"/getAvailable/drones/%zd",isAvailable ? 1 : 0];
+    [self commonGETRequestWithApiCall:apiCall callBack:completition];
+}
+
+- (void)getDronesWithStatusActive:(BOOL)isActive withCallback:(CompletitionBlock)completition
+{
+    NSString *value = isActive ? @"active" : @"inactive";
+    NSString *apiCall = [NSString stringWithFormat:@"/getStatus/drones/%@",value];
+    [self commonGETRequestWithApiCall:apiCall callBack:completition];
+}
+
+- (void)getDronesForType:(DroneType)droneType withCallback:(CompletitionBlock)completition
+{
+    NSString *value = droneType == DroneTypeMachine ? @"machine" : @"aircraft";
+    NSString *apiCall = [NSString stringWithFormat:@"/getType/drones/%@",value];
+    [self commonGETRequestWithApiCall:apiCall callBack:completition];
+}
+
 
 #pragma mark - Private methods
 
+- (void)getAccessTokenWithEmail:(NSString *)email andPassword:(NSString *)password completition:(CompletitionBlock)completition
+{
+    NSDictionary *params = @{@"email": email,
+                             @"password": password};
+    
+    [self commonPOSTRequestWithApiCall:@"/get/token" params:params callBack:^(BOOL success, id result) {
+        if (success) {
+            NSString *token = [result safeObjectForKey:@"token"];
+            if (token) {
+                _accessToken = [@"Bearer " stringByAppendingString:token];
+
+                completition(YES,_accessToken);
+                return;
+            }
+        }
+        completition(NO,nil);
+    }];
+}
+
 - (void)commonGETRequestWithApiCall:(NSString *)apiCall callBack:(CompletitionBlock)completition
 {
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = [self defaultManager];
     
     NSString *request = [self apiURLForCall:apiCall];
     
@@ -63,7 +123,7 @@
                               params:(NSDictionary *)params
                             callBack:(CompletitionBlock)completition
 {
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = [self defaultManager];
     
     NSString *request = [self apiURLForCall:apiCall];
     
@@ -85,7 +145,7 @@
                              params:(NSDictionary *)params
                            callBack:(CompletitionBlock)completition
 {
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = [self defaultManager];
     
     NSString *request = [self apiURLForCall:apiCall];
     
@@ -106,7 +166,7 @@
 - (void)commonDELETERequestWithApiCall:(NSString *)apiCall
                               callBack:(CompletitionBlock)completition
 {
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = [self defaultManager];
     
     NSString *request = [self apiURLForCall:apiCall];
     
@@ -126,8 +186,17 @@
 
 - (NSString *)apiURLForCall:(NSString *)apiCall
 {
-    NSString *urlString = [NSString stringWithFormat:@"%@/%@",self.hostForDataCenter,apiCall];
+    NSString *urlString = [NSString stringWithFormat:@"%@/v1%@",self.hostForDataCenter,apiCall];
     return urlString;
+}
+
+- (AFHTTPSessionManager *)defaultManager
+{
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    if (self.accessToken) {
+        [manager.requestSerializer setValue:self.accessToken forHTTPHeaderField:@"Authorization"];
+    }
+    return manager;
 }
 
 #pragma mark - Network Connectivity

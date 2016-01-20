@@ -25,4 +25,21 @@ typedef NS_ENUM(NSInteger,ErrorType) {
     ErrorTypeResponseWithError = 1000
 };
 
+
+typedef NS_ENUM(NSInteger, DroneType) {
+    DroneTypeAircraft,
+    DroneTypeMachine
+};
+
+typedef NS_ENUM(NSInteger, Direction) {
+    DirectionN,
+    DirectionE,
+    DirectionS,
+    DirectionW,
+    DirectionNW,
+    DirectionNE,
+    DirectionSE,
+    DirectionSW
+};
+
 #endif /* Constants_h */

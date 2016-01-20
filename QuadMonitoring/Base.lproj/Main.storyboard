@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="or1-qu-S0F">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="or1-qu-S0F">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <scenes>
         <!--Streams-->
@@ -112,44 +111,43 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="IP Adress" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UCf-ML-lpB">
-                                <rect key="frame" x="20" y="28" width="455" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="WcR-SI-RS2"/>
-                                </constraints>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Host" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UCf-ML-lpB">
+                                <rect key="frame" x="20" y="28" width="560" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="URL"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Port" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Vxe-Cu-Ckh">
-                                <rect key="frame" x="483" y="28" width="97" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="97" id="5tY-Qh-SBt"/>
-                                    <constraint firstAttribute="height" constant="30" id="x4u-vu-INz"/>
-                                </constraints>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5Qs-ta-FyI">
+                                <rect key="frame" x="20" y="66" width="560" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                             </textField>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w6B-c2-6hL">
-                                <rect key="frame" x="107" y="129" width="51" height="31"/>
-                            </switch>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9x5-a6-5LZ">
+                                <rect key="frame" x="20" y="104" width="560" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                            </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CqO-TG-Q0K">
-                                <rect key="frame" x="456" y="78" width="124" height="30"/>
+                                <rect key="frame" x="456" y="142" width="124" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="124" id="icX-8U-36v"/>
-                                    <constraint firstAttribute="height" constant="30" id="t0X-OO-jZe"/>
+                                    <constraint firstAttribute="width" constant="124" id="2D6-Vq-ghk"/>
+                                    <constraint firstAttribute="height" constant="30" id="8DV-C3-mxd"/>
                                 </constraints>
                                 <state key="normal" title="Save"/>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="UCf-ML-lpB" firstAttribute="leading" secondItem="JKc-M9-bCu" secondAttribute="leading" constant="20" id="RYD-71-ysV"/>
-                            <constraint firstItem="UCf-ML-lpB" firstAttribute="top" secondItem="twR-Bl-1d1" secondAttribute="bottom" constant="8" id="beN-o4-bMp"/>
-                            <constraint firstItem="CqO-TG-Q0K" firstAttribute="trailing" secondItem="JKc-M9-bCu" secondAttribute="trailingMargin" id="mWm-j9-W7w"/>
-                            <constraint firstAttribute="trailing" secondItem="Vxe-Cu-Ckh" secondAttribute="trailing" constant="20" id="mfb-Jm-qXt"/>
-                            <constraint firstItem="Vxe-Cu-Ckh" firstAttribute="top" secondItem="twR-Bl-1d1" secondAttribute="bottom" constant="8" id="nZ0-nh-RTe"/>
-                            <constraint firstItem="CqO-TG-Q0K" firstAttribute="top" secondItem="Vxe-Cu-Ckh" secondAttribute="bottom" constant="20" id="otl-0W-Fsw"/>
-                            <constraint firstItem="Vxe-Cu-Ckh" firstAttribute="leading" secondItem="UCf-ML-lpB" secondAttribute="trailing" constant="8" id="pBe-ts-rGt"/>
+                            <constraint firstAttribute="trailing" secondItem="9x5-a6-5LZ" secondAttribute="trailing" constant="20" id="1bJ-UY-JRs"/>
+                            <constraint firstItem="9x5-a6-5LZ" firstAttribute="top" secondItem="5Qs-ta-FyI" secondAttribute="bottom" constant="8" id="4Ek-NS-mpu"/>
+                            <constraint firstItem="5Qs-ta-FyI" firstAttribute="top" secondItem="UCf-ML-lpB" secondAttribute="bottom" constant="8" id="GYh-ZV-0gW"/>
+                            <constraint firstItem="UCf-ML-lpB" firstAttribute="leading" secondItem="JKc-M9-bCu" secondAttribute="leading" constant="20" id="RHd-ef-kYO"/>
+                            <constraint firstAttribute="trailing" secondItem="5Qs-ta-FyI" secondAttribute="trailing" constant="20" id="SDo-Mp-uZT"/>
+                            <constraint firstItem="5Qs-ta-FyI" firstAttribute="leading" secondItem="JKc-M9-bCu" secondAttribute="leading" constant="20" id="ghv-VV-RtP"/>
+                            <constraint firstAttribute="trailing" secondItem="UCf-ML-lpB" secondAttribute="trailing" constant="20" id="grD-pB-Scy"/>
+                            <constraint firstItem="CqO-TG-Q0K" firstAttribute="top" secondItem="9x5-a6-5LZ" secondAttribute="bottom" constant="8" id="icW-gb-y7D"/>
+                            <constraint firstAttribute="trailing" secondItem="CqO-TG-Q0K" secondAttribute="trailing" constant="20" id="k0A-Dv-Bcq"/>
+                            <constraint firstItem="UCf-ML-lpB" firstAttribute="top" secondItem="twR-Bl-1d1" secondAttribute="bottom" constant="8" id="nxD-pc-jLj"/>
+                            <constraint firstItem="9x5-a6-5LZ" firstAttribute="leading" secondItem="JKc-M9-bCu" secondAttribute="leading" constant="20" id="pZE-20-QUt"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>

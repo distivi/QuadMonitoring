@@ -10,33 +10,71 @@
 #import "Engine.h"
 #import "BaseParser.h"
 #import "CommonParser.h"
-#import "StringListParser.h"
-#import "MonitoringObjectParser.h"
+#import "DroneParser.h"
+#import "SensorParser.h"
+#import "SensorValueParser.h"
+#import "CommandParser.h"
+#import "RouteParser.h"
+
+#import "Drone.h"
+#import "Route.h"
+#import "Sensor.h"
+#import "SensorValue.h"
+#import "Command.h"
+
+#define SERVER [[Engine sharedEngine] serverManager]
+
 
 @implementation DataManager
 
-- (void)getAvailableMonitoringObjectsWithCallBack:(CompletitionBlock)callback
+- (void)getDronesWithCallback:(CompletitionBlock)completition
 {
-    StringListParser *parser = [StringListParser new];
-    CompletitionBlock completition = [self commonParserWithFeedBack:callback parser:parser];
-    
-    [[[Engine sharedEngine] serverManager] getAvailableMonitoringObjectsWithCallBack:completition];
+    CompletitionBlock callback = [self commonParserWithFeedBack:completition
+                                                         parser:[DroneParser new]
+                                                   mustParsList:YES];
+    [SERVER getDroneForDrone:0 withCallback:callback];
 }
 
-- (void)getLastInfoForMonitoringObject:(NSString *)objectID callBack:(CompletitionBlock)callback
+- (void)getCommandsForDrone:(Drone *)dron withCallback:(CompletitionBlock)completition
 {
-    MonitoringObjectParser *parser = [MonitoringObjectParser new];
-    CompletitionBlock completition = [self commonParserWithFeedBack:callback parser:parser];
-    
-    [[[Engine sharedEngine] serverManager] getLastInfoForMonitoringObject:objectID callBack:completition];
+    CompletitionBlock callback = [self commonParserWithFeedBack:completition
+                                                         parser:[CommandParser new]
+                                                   mustParsList:YES];
+    [SERVER getCommandForDrone:dron.droneId withCallback:callback];
 }
+
+- (void)getRoutesForDrone:(Drone *)dron withCallback:(CompletitionBlock)completition
+{
+    CompletitionBlock callback = [self commonParserWithFeedBack:completition
+                                                         parser:[RouteParser new]
+                                                   mustParsList:YES];
+    [SERVER getRouteForDrone:dron.droneId withCallback:callback];
+}
+
+- (void)getSensorForDrone:(Drone *)dron withCallback:(CompletitionBlock)completition
+{
+    CompletitionBlock callback = [self commonParserWithFeedBack:completition
+                                                         parser:[SensorParser new]
+                                                   mustParsList:YES];
+    [SERVER getSensorForDrone:dron.droneId withCallback:callback];
+}
+
+- (void)getValuesForSensor:(Sensor *)sensor withCallback:(CompletitionBlock)completition
+{
+    CompletitionBlock callback = [self commonParserWithFeedBack:completition
+                                                         parser:[SensorValueParser new]
+                                                   mustParsList:YES];
+    [SERVER getValuesForSensor:sensor.sensorId withCallback:callback];
+}
+
 
 #pragma mark - Private methods
 
 - (CompletitionBlock)commonParserWithFeedBack:(CompletitionBlock)callback
                                        parser:(BaseParser *)parser
+                                 mustParsList:(BOOL)mustParseList
 {
-    CommonParser *commonParser = [CommonParser parserWithModelParser:parser];
+    CommonParser *commonParser = [CommonParser parserWithModelParser:parser toParseList:mustParseList];
     
     CompletitionBlock completitionBlock = ^(BOOL success, id result) {
         if (success) {            
