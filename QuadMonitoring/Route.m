@@ -7,7 +7,13 @@
 //
 
 #import "Route.h"
+#import <MapKit/MapKit.h>
 
 @implementation Route
+
+- (CLLocation *)location
+{
+    return [[CLLocation alloc] initWithLatitude:self.latitude longitude:self.longitude];
+}
 
 @end

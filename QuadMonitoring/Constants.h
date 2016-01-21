@@ -22,7 +22,7 @@ typedef void (^CompletitionBlock)(BOOL success, id result);
 #define ErrorMessage @"errorMessage"
 
 typedef NS_ENUM(NSInteger,ErrorType) {
-    ErrorTypeResponseWithError = 1000
+    ErrorTypeResponseWithError = 1000,
 };
 
 

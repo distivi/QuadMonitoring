@@ -11,6 +11,8 @@
 
 @class Route;
 @class Sensor;
+@class Command;
+@class CLLocation;
 
 @interface Drone : NSObject
 
@@ -21,7 +23,14 @@
 @property (nonatomic, strong) NSString *name;
 
 @property (nonatomic, strong) NSMutableArray *routes;
-@property (nonatomic, strong) NSMutableArray *sensors;
+@property (nonatomic, strong) NSMutableArray *commands;
+@property (nonatomic, strong) NSMutableSet *sensors;
+
+- (void)addNewCommands:(NSArray *)commands;
+- (void)addNewRoutes:(NSArray *)routes;
+- (void)addNewSensor:(Sensor *)sensor;
+
+- (NSArray *)getRoutePath;
 
 
 @end

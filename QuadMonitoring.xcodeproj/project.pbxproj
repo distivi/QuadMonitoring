@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B65098D36193EF23DBBD8C6C /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AB9F6EA39240B98D1439371 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		F618E2351C5122DC00418EF0 /* CommandAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = F618E2341C5122DC00418EF0 /* CommandAnnotation.m */; };
 		F65B919A1C2329A300380DDB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F65B91991C2329A300380DDB /* main.m */; };
 		F65B919D1C2329A300380DDB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F65B919C1C2329A300380DDB /* AppDelegate.m */; };
 		F65B91A31C2329A300380DDB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F65B91A11C2329A300380DDB /* Main.storyboard */; };
@@ -56,6 +57,8 @@
 		02764555D3503E8B18AB714B /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		0A8118D03EB40E6E853B36D9 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		7AB9F6EA39240B98D1439371 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F618E2331C5122DC00418EF0 /* CommandAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommandAnnotation.h; sourceTree = "<group>"; };
+		F618E2341C5122DC00418EF0 /* CommandAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommandAnnotation.m; sourceTree = "<group>"; };
 		F65B91951C2329A300380DDB /* QuadMonitoring.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuadMonitoring.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F65B91991C2329A300380DDB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F65B919B1C2329A300380DDB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -229,6 +232,8 @@
 				F65D92471C3194930062ED34 /* DroneAnnotation.m */,
 				F6A628431C4D5AE9006B50FA /* CarAnnotation.h */,
 				F6A628441C4D5AE9006B50FA /* CarAnnotation.m */,
+				F618E2331C5122DC00418EF0 /* CommandAnnotation.h */,
+				F618E2341C5122DC00418EF0 /* CommandAnnotation.m */,
 			);
 			name = Annotations;
 			sourceTree = "<group>";
@@ -495,6 +500,7 @@
 				F6A876251C4FFEF70012F032 /* SensorParser.m in Sources */,
 				F6A8762B1C5000400012F032 /* Command.m in Sources */,
 				F6C524821C49453200FE9C30 /* CommonParser.m in Sources */,
+				F618E2351C5122DC00418EF0 /* CommandAnnotation.m in Sources */,
 				F6C524771C493DD000FE9C30 /* BaseParser.m in Sources */,
 				F6C524651C49082100FE9C30 /* MonitoringObject.m in Sources */,
 				F6A628451C4D5AE9006B50FA /* CarAnnotation.m in Sources */,

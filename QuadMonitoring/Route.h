@@ -10,6 +10,7 @@
 #import "Constants.h"
 
 @class Drone;
+@class CLLocation;
 
 @interface Route : NSObject
 
@@ -21,5 +22,7 @@
 @property (nonatomic) NSInteger routeId;
 @property (nonatomic) double latitude;
 @property (nonatomic) double longitude;
+
+- (CLLocation *)location;
 
 @end

@@ -28,7 +28,7 @@
 - (void)parseJSON:(id)json withResult:(ParsingResultBlock)result
 {
     BOOL success = [[json safeObjectForKey:@"success"] boolValue];
-    NSString *errorMessage = [json safeObjectForKey:@"error"];
+    NSString *errorMessage = [json safeObjectForKey:@"msg"];
     id data = [json safeObjectForKey:@"data"];
     
     if (success) {

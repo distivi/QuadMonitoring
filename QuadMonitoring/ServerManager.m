@@ -24,35 +24,35 @@
 
 - (void)getCommandForDrone:(NSInteger)dronID withCallback:(CompletitionBlock)completition
 {
-    NSString *droneName = dronID != 0 ? [@(dronID) stringValue] : nil;
+    NSString *droneName = dronID != 0 ? [@(dronID) stringValue] : @"";
     NSString *apiCall = [NSString stringWithFormat:@"/get/command/%@",droneName];
     [self commonGETRequestWithApiCall:apiCall callBack:completition];
 }
 
 - (void)getDroneForDrone:(NSInteger)dronID withCallback:(CompletitionBlock)completition
 {
-    NSString *droneName = dronID != 0 ? [@(dronID) stringValue] : nil;
+    NSString *droneName = dronID != 0 ? [@(dronID) stringValue] : @"";
     NSString *apiCall = [NSString stringWithFormat:@"/get/drone/%@",droneName];
     [self commonGETRequestWithApiCall:apiCall callBack:completition];
 }
 
 - (void)getRouteForDrone:(NSInteger)dronID withCallback:(CompletitionBlock)completition
 {
-    NSString *droneName = dronID != 0 ? [@(dronID) stringValue] : nil;
+    NSString *droneName = dronID != 0 ? [@(dronID) stringValue] : @"";
     NSString *apiCall = [NSString stringWithFormat:@"/get/route/%@",droneName];
     [self commonGETRequestWithApiCall:apiCall callBack:completition];
 }
 
 - (void)getSensorForDrone:(NSInteger)dronID withCallback:(CompletitionBlock)completition
 {
-    NSString *droneName = dronID != 0 ? [@(dronID) stringValue] : nil;
+    NSString *droneName = dronID != 0 ? [@(dronID) stringValue] : @"";
     NSString *apiCall = [NSString stringWithFormat:@"/get/sensor/%@",droneName];
     [self commonGETRequestWithApiCall:apiCall callBack:completition];
 }
 
 - (void)getValuesForSensor:(NSInteger)sensorID withCallback:(CompletitionBlock)completition
 {
-    NSString *sensorName = sensorID != 0 ? [@(sensorID) stringValue] : nil;
+    NSString *sensorName = sensorID != 0 ? [@(sensorID) stringValue] : @"";
     NSString *apiCall = [NSString stringWithFormat:@"/get/values/%@",sensorName];
     [self commonGETRequestWithApiCall:apiCall callBack:completition];
 }
@@ -106,7 +106,7 @@
     NSString *request = [self apiURLForCall:apiCall];
     
     [manager GET:request parameters:nil progress:nil success:^(NSURLSessionTask *task, id responseObject) {
-        NSLog(@"JSON: %@", responseObject);
+//        NSLog(@"JSON: %@", responseObject);
         if (completition) {
             completition(YES,responseObject);
         }
@@ -128,7 +128,7 @@
     NSString *request = [self apiURLForCall:apiCall];
     
     [manager POST:request parameters:params progress:nil success:^(NSURLSessionTask *task, id responseObject) {
-        NSLog(@"JSON: %@", responseObject);
+//        NSLog(@"JSON: %@", responseObject);
         if (completition) {
             completition(YES,responseObject);
         }
@@ -150,7 +150,7 @@
     NSString *request = [self apiURLForCall:apiCall];
     
     [manager PUT:request parameters:params success:^(NSURLSessionTask *task, id responseObject) {
-        NSLog(@"JSON: %@", responseObject);
+//        NSLog(@"JSON: %@", responseObject);
         if (completition) {
             completition(YES,responseObject);
         }
@@ -171,7 +171,7 @@
     NSString *request = [self apiURLForCall:apiCall];
     
     [manager DELETE:request parameters:nil success:^(NSURLSessionTask *task, id responseObject) {
-        NSLog(@"JSON: %@", responseObject);
+//        NSLog(@"JSON: %@", responseObject);
         if (completition) {
             completition(YES,responseObject);
         }

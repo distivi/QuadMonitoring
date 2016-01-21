@@ -17,6 +17,9 @@
 
 @interface DataManager : NSObject
 
+- (void)loginUser:(NSString *)userEmail withPassword:(NSString *)password toServer:(NSString *)host withCallback:(CompletitionBlock)completition;
+
+#pragma mark - GET
 - (void)getDronesWithCallback:(CompletitionBlock)completition;
 - (void)getCommandsForDrone:(Drone *)dron withCallback:(CompletitionBlock)completition;
 - (void)getRoutesForDrone:(Drone *)dron withCallback:(CompletitionBlock)completition;

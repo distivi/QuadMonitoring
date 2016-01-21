@@ -27,6 +27,24 @@
 
 @implementation DataManager
 
+- (void)loginUser:(NSString *)userEmail withPassword:(NSString *)password toServer:(NSString *)host withCallback:(CompletitionBlock)completition
+{
+    [[[Engine sharedEngine] serverManager] setHostForDataCenter:host];
+    
+    [[[Engine sharedEngine] serverManager] login:userEmail andPassword:password withCallback:^(BOOL success, id result) {
+        if (success) {
+            SettingsManager *settings = [[Engine sharedEngine] settingsManager];
+            [settings setAccessToken:result];
+            [settings setEmail:userEmail];
+            [settings setPassword:password];
+            
+            completition(YES,nil);
+        } else {
+            completition(NO, result);
+        }
+    }];
+}
+
 - (void)getDronesWithCallback:(CompletitionBlock)completition
 {
     CompletitionBlock callback = [self commonParserWithFeedBack:completition
@@ -55,7 +73,7 @@
 {
     CompletitionBlock callback = [self commonParserWithFeedBack:completition
                                                          parser:[SensorParser new]
-                                                   mustParsList:YES];
+                                                   mustParsList:NO];
     [SERVER getSensorForDrone:dron.droneId withCallback:callback];
 }
 

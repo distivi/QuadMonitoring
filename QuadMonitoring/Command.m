@@ -10,4 +10,12 @@
 
 @implementation Command
 
+- (BOOL)isEqual:(id)object
+{
+    if (self.commandID == [(Command *)object commandID]) {
+        return YES;
+    }
+    return NO;
+}
+
 @end

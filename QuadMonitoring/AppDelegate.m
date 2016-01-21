@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "Engine.h"
 
 @interface AppDelegate ()
 
@@ -17,7 +18,18 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    [self prepareManagers];
+    
     return YES;
+}
+
+- (void)prepareManagers
+{
+    NSString *host = [[[Engine sharedEngine] settingsManager] dataCenterHost];
+    NSString *token = [[[Engine sharedEngine] settingsManager] accessToken];
+    
+    [[[Engine sharedEngine] serverManager] setHostForDataCenter:host];
+    [[[Engine sharedEngine] serverManager] setAccessToken:token];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

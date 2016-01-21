@@ -12,23 +12,27 @@
 
 @class BaseAnnotation;
 @class MonitoringObject;
+@class Drone;
+@class Command;
+@class CommandAnnotation;
 
 @protocol MonitoringObjectDelegate <NSObject>
 
 - (void)monitoringObject:(MonitoringObject *)sender didChangePosition:(CLLocationCoordinate2D)coordinate;
+- (void)monitoringObject:(MonitoringObject *)sender didAddNewCommandAnnotation:(CommandAnnotation *)commandAnnotation;
+- (void)monitoringObject:(MonitoringObject *)sender updatedRoutePath:(NSArray *)routePath;
 
 @end
 
 @interface MonitoringObject : NSObject
 
-@property (nonatomic, strong) NSString *identifier;
-@property (nonatomic, strong) BaseAnnotation *annotation;
-@property (nonatomic, strong) NSMutableArray *movingPoints;
+@property (nonatomic, strong) Drone *drone;
+@property (nonatomic, strong, readonly) BaseAnnotation *annotation;
+@property (nonatomic, strong, readonly) NSMutableArray *commandsAnnorations;
 @property (nonatomic, weak) id<MonitoringObjectDelegate> delegate;
 
-@property (nonatomic, assign) DroneType annotationsType;
 
-- (instancetype)initWithIdentifier:(NSString *)identifier annotationsType:(DroneType)annotationsType;
+- (instancetype)initWithDrone:(Drone *)drone;
 
 - (void)startMonitoring;
 - (void)stopMonitoring;

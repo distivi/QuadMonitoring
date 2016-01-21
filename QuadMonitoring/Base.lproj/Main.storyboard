@@ -102,7 +102,7 @@
         <!--Settings-->
         <scene sceneID="39K-1S-f7m">
             <objects>
-                <viewController id="ihP-6B-eg2" sceneMemberID="viewController">
+                <viewController id="ihP-6B-eg2" customClass="SettingsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="twR-Bl-1d1"/>
                         <viewControllerLayoutGuide type="bottom" id="5p7-3C-4dS"/>
@@ -115,16 +115,25 @@
                                 <rect key="frame" x="20" y="28" width="560" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="URL"/>
+                                <connections>
+                                    <outlet property="delegate" destination="ihP-6B-eg2" id="Bti-WQ-o4K"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5Qs-ta-FyI">
                                 <rect key="frame" x="20" y="66" width="560" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
+                                <connections>
+                                    <outlet property="delegate" destination="ihP-6B-eg2" id="SfF-iQ-Vdx"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9x5-a6-5LZ">
                                 <rect key="frame" x="20" y="104" width="560" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="ihP-6B-eg2" id="Dx7-5u-FmJ"/>
+                                </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CqO-TG-Q0K">
                                 <rect key="frame" x="456" y="142" width="124" height="30"/>
@@ -133,6 +142,9 @@
                                     <constraint firstAttribute="height" constant="30" id="8DV-C3-mxd"/>
                                 </constraints>
                                 <state key="normal" title="Save"/>
+                                <connections>
+                                    <action selector="save:" destination="ihP-6B-eg2" eventType="touchUpInside" id="6bk-WF-cEs"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -152,6 +164,11 @@
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <tabBarItem key="tabBarItem" title="Settings" id="HfC-bz-eck"/>
+                    <connections>
+                        <outlet property="hostTextField" destination="UCf-ML-lpB" id="SDL-qM-smi"/>
+                        <outlet property="loginTextField" destination="5Qs-ta-FyI" id="xAf-qX-pKX"/>
+                        <outlet property="passwordTextField" destination="9x5-a6-5LZ" id="D8z-We-Kes"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J5f-Cp-0PR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -170,7 +187,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" pitchEnabled="NO" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dwZ-1p-wFe">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
+                                <rect key="frame" x="0.0" y="44" width="600" height="507"/>
                                 <connections>
                                     <outlet property="delegate" destination="16r-R8-Qx7" id="X09-4V-owt"/>
                                 </connections>
@@ -205,13 +222,42 @@
                                     <constraint firstAttribute="width" constant="96" id="uVS-l5-tqQ"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oVl-5l-3Il">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Drones: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7cu-aV-dBz">
+                                        <rect key="frame" x="5" y="0.0" width="110" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="110" id="0Nd-Q5-8Qy"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoDark" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LHh-wX-DG7">
+                                        <rect key="frame" x="570" y="11" width="22" height="22"/>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="LHh-wX-DG7" firstAttribute="centerY" secondItem="oVl-5l-3Il" secondAttribute="centerY" id="78b-Jw-r0p"/>
+                                    <constraint firstItem="7cu-aV-dBz" firstAttribute="leading" secondItem="oVl-5l-3Il" secondAttribute="leading" constant="5" id="Kcl-9c-Lye"/>
+                                    <constraint firstAttribute="height" constant="44" id="Omo-da-rMF"/>
+                                    <constraint firstAttribute="trailing" secondItem="LHh-wX-DG7" secondAttribute="trailing" constant="8" id="nkL-z3-4zJ"/>
+                                    <constraint firstAttribute="bottom" secondItem="7cu-aV-dBz" secondAttribute="bottom" id="uKI-Ta-LVk"/>
+                                    <constraint firstItem="7cu-aV-dBz" firstAttribute="top" secondItem="oVl-5l-3Il" secondAttribute="top" id="wg7-mf-mP8"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="oVl-5l-3Il" firstAttribute="top" secondItem="snE-C3-NjW" secondAttribute="top" id="36C-qk-CA7"/>
+                            <constraint firstAttribute="trailing" secondItem="oVl-5l-3Il" secondAttribute="trailing" id="Grc-Gy-DN1"/>
                             <constraint firstItem="Tvj-nm-2QA" firstAttribute="top" secondItem="JPI-zV-eSw" secondAttribute="bottom" id="MW8-He-HcR"/>
                             <constraint firstAttribute="trailing" secondItem="JPI-zV-eSw" secondAttribute="trailing" id="Uwb-Ch-bKT"/>
+                            <constraint firstItem="dwZ-1p-wFe" firstAttribute="top" secondItem="oVl-5l-3Il" secondAttribute="bottom" id="ZrO-AI-jn5"/>
                             <constraint firstItem="dwZ-1p-wFe" firstAttribute="leading" secondItem="snE-C3-NjW" secondAttribute="leading" id="hhA-FL-f9u"/>
-                            <constraint firstItem="dwZ-1p-wFe" firstAttribute="top" secondItem="snE-C3-NjW" secondAttribute="top" id="q7X-Qu-DLg"/>
+                            <constraint firstItem="oVl-5l-3Il" firstAttribute="leading" secondItem="snE-C3-NjW" secondAttribute="leading" id="vlR-Pl-47j"/>
                             <constraint firstItem="Tvj-nm-2QA" firstAttribute="top" secondItem="dwZ-1p-wFe" secondAttribute="bottom" id="yKf-OX-oRH"/>
                             <constraint firstAttribute="trailing" secondItem="dwZ-1p-wFe" secondAttribute="trailing" id="z7W-si-GR3"/>
                         </constraints>
@@ -219,6 +265,7 @@
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <tabBarItem key="tabBarItem" title="Map" id="bBL-g9-3rB"/>
                     <connections>
+                        <outlet property="dronesCountLabel" destination="7cu-aV-dBz" id="J95-F5-7bq"/>
                         <outlet property="followMeSwitch" destination="YNV-9P-NUE" id="I71-fm-pkd"/>
                         <outlet property="mapView" destination="dwZ-1p-wFe" id="hqj-Si-7r1"/>
                     </connections>

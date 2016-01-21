@@ -10,4 +10,12 @@
 
 @implementation SensorValue
 
+- (BOOL)isEqual:(id)object
+{
+    if (self.valueId == [(SensorValue *)object valueId]) {
+        return YES;
+    }
+    return NO;
+}
+
 @end

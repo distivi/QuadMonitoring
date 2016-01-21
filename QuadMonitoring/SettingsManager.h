@@ -12,6 +12,8 @@
 
 @property (nonatomic, strong) NSString *dataCenterHost;
 @property (nonatomic, strong) NSString *accessToken;
+@property (nonatomic, strong) NSString *email;
+@property (nonatomic, strong) NSString *password;
 
 
 @end

@@ -14,6 +14,9 @@
 
 #define kDataCenterHost         @"kDataCenterHost"
 #define kAccessToken            @"kAccessToken"
+#define kEmail                  @"kEmail"
+#define kPassword               @"kPassword"
+
 
 @implementation SettingsManager
 
@@ -24,8 +27,10 @@
             [self setDataCenterHost:kDefaultDataCenterHost];
             [defaults setObject:@(YES) forKey:kIsDefaultValueSetted];
         } else {
-            _dataCenterHost =[defaults objectForKey:kDataCenterHost];
-            _accessToken =     [defaults objectForKey:kAccessToken] ;
+            _dataCenterHost = [defaults objectForKey:kDataCenterHost];
+            _accessToken = [defaults objectForKey:kAccessToken];
+            _email = [defaults objectForKey:kEmail];
+            _password = [defaults objectForKey:kPassword];            
         }
     }
     return self;
@@ -41,6 +46,18 @@
 {
     _accessToken = accessToken;
     [self saveValue:_accessToken forKey:kAccessToken];
+}
+
+- (void)setEmail:(NSString *)email
+{
+    _email = email;
+    [self saveValue:_email forKey:kEmail];
+}
+
+- (void)setPassword:(NSString *)password
+{
+    _password =password;
+    [self saveValue:_password forKey:kPassword];
 }
 
 

@@ -45,5 +45,7 @@
 	</array>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Location is required to find out where you are</string>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
 </dict>
 </plist>
