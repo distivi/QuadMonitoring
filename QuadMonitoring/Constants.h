@@ -14,7 +14,9 @@ typedef void (^CompletitionBlock)(BOOL success, id result);
 #define FORMAT(format, ...) \
     [NSString stringWithFormat:format, ##__VA_ARGS__]
 
+// Notifications
 
+#define KNotificationAddRouteForTask    @"KNotificationAddRouteForTask"
 
 // APP Errors
 

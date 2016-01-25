@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B65098D36193EF23DBBD8C6C /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AB9F6EA39240B98D1439371 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		F604E8C71C52908B00C3A223 /* DroneTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F604E8C61C52908B00C3A223 /* DroneTableViewCell.m */; };
 		F618E2351C5122DC00418EF0 /* CommandAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = F618E2341C5122DC00418EF0 /* CommandAnnotation.m */; };
 		F65B919A1C2329A300380DDB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F65B91991C2329A300380DDB /* main.m */; };
 		F65B919D1C2329A300380DDB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F65B919C1C2329A300380DDB /* AppDelegate.m */; };
@@ -17,7 +18,15 @@
 		F65B91B31C2329A300380DDB /* QuadMonitoringTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F65B91B21C2329A300380DDB /* QuadMonitoringTests.m */; };
 		F65B91BE1C232C1C00380DDB /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F65B91BD1C232C1C00380DDB /* MapKit.framework */; };
 		F65D92481C3194930062ED34 /* DroneAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = F65D92471C3194930062ED34 /* DroneAnnotation.m */; };
-		F65D924B1C31981E0062ED34 /* DrawUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F65D924A1C31981E0062ED34 /* DrawUtils.m */; };
+		F688F2671C5621380080F53C /* BatteryView.m in Sources */ = {isa = PBXBuildFile; fileRef = F688F2661C5621380080F53C /* BatteryView.m */; };
+		F688F26A1C5626DF0080F53C /* DroneTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F688F2691C5626DF0080F53C /* DroneTableViewController.m */; };
+		F688F26D1C5627F20080F53C /* UIImage+Drone.m in Sources */ = {isa = PBXBuildFile; fileRef = F688F26C1C5627F20080F53C /* UIImage+Drone.m */; };
+		F688F2741C565BE80080F53C /* DroneDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F688F2731C565BE80080F53C /* DroneDetailsViewController.m */; };
+		F688F2771C566CC80080F53C /* TasksTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F688F2761C566CC80080F53C /* TasksTableViewController.m */; };
+		F688F27A1C566EC00080F53C /* NSDate+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = F688F2791C566EC00080F53C /* NSDate+Utils.m */; };
+		F688F27D1C5674DB0080F53C /* StyleKit.m in Sources */ = {isa = PBXBuildFile; fileRef = F688F27B1C5674DB0080F53C /* StyleKit.m */; };
+		F688F2801C56754A0080F53C /* TargetView.m in Sources */ = {isa = PBXBuildFile; fileRef = F688F27F1C56754A0080F53C /* TargetView.m */; };
+		F688F2831C5681DA0080F53C /* AddTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F688F2821C5681DA0080F53C /* AddTaskViewController.m */; };
 		F6A628451C4D5AE9006B50FA /* CarAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A628441C4D5AE9006B50FA /* CarAnnotation.m */; };
 		F6A8760C1C4FDA5C0012F032 /* SettingsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A8760B1C4FDA5C0012F032 /* SettingsManager.m */; };
 		F6A876101C4FDD710012F032 /* Drone.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A8760F1C4FDD710012F032 /* Drone.m */; };
@@ -57,6 +66,8 @@
 		02764555D3503E8B18AB714B /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		0A8118D03EB40E6E853B36D9 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		7AB9F6EA39240B98D1439371 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F604E8C51C52908B00C3A223 /* DroneTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DroneTableViewCell.h; sourceTree = "<group>"; };
+		F604E8C61C52908B00C3A223 /* DroneTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DroneTableViewCell.m; sourceTree = "<group>"; };
 		F618E2331C5122DC00418EF0 /* CommandAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommandAnnotation.h; sourceTree = "<group>"; };
 		F618E2341C5122DC00418EF0 /* CommandAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommandAnnotation.m; sourceTree = "<group>"; };
 		F65B91951C2329A300380DDB /* QuadMonitoring.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuadMonitoring.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -73,8 +84,24 @@
 		F65B91BD1C232C1C00380DDB /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		F65D92461C3194930062ED34 /* DroneAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DroneAnnotation.h; sourceTree = "<group>"; };
 		F65D92471C3194930062ED34 /* DroneAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DroneAnnotation.m; sourceTree = "<group>"; };
-		F65D92491C31981E0062ED34 /* DrawUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawUtils.h; sourceTree = "<group>"; };
-		F65D924A1C31981E0062ED34 /* DrawUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawUtils.m; sourceTree = "<group>"; };
+		F688F2651C5621380080F53C /* BatteryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BatteryView.h; sourceTree = "<group>"; };
+		F688F2661C5621380080F53C /* BatteryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BatteryView.m; sourceTree = "<group>"; };
+		F688F2681C5626DF0080F53C /* DroneTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DroneTableViewController.h; sourceTree = "<group>"; };
+		F688F2691C5626DF0080F53C /* DroneTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DroneTableViewController.m; sourceTree = "<group>"; };
+		F688F26B1C5627F20080F53C /* UIImage+Drone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Drone.h"; sourceTree = "<group>"; };
+		F688F26C1C5627F20080F53C /* UIImage+Drone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Drone.m"; sourceTree = "<group>"; };
+		F688F2721C565BE80080F53C /* DroneDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DroneDetailsViewController.h; sourceTree = "<group>"; };
+		F688F2731C565BE80080F53C /* DroneDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DroneDetailsViewController.m; sourceTree = "<group>"; };
+		F688F2751C566CC80080F53C /* TasksTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TasksTableViewController.h; sourceTree = "<group>"; };
+		F688F2761C566CC80080F53C /* TasksTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TasksTableViewController.m; sourceTree = "<group>"; };
+		F688F2781C566EC00080F53C /* NSDate+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Utils.h"; sourceTree = "<group>"; };
+		F688F2791C566EC00080F53C /* NSDate+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Utils.m"; sourceTree = "<group>"; };
+		F688F27B1C5674DB0080F53C /* StyleKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StyleKit.m; sourceTree = "<group>"; };
+		F688F27C1C5674DB0080F53C /* StyleKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StyleKit.h; sourceTree = "<group>"; };
+		F688F27E1C56754A0080F53C /* TargetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TargetView.h; sourceTree = "<group>"; };
+		F688F27F1C56754A0080F53C /* TargetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TargetView.m; sourceTree = "<group>"; };
+		F688F2811C5681DA0080F53C /* AddTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddTaskViewController.h; sourceTree = "<group>"; };
+		F688F2821C5681DA0080F53C /* AddTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddTaskViewController.m; sourceTree = "<group>"; };
 		F6A628431C4D5AE9006B50FA /* CarAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarAnnotation.h; sourceTree = "<group>"; };
 		F6A628441C4D5AE9006B50FA /* CarAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarAnnotation.m; sourceTree = "<group>"; };
 		F6A8760A1C4FDA5C0012F032 /* SettingsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsManager.h; sourceTree = "<group>"; };
@@ -163,6 +190,36 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		F604E8C31C52906D00C3A223 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F604E8C41C52907200C3A223 /* TableCells */,
+				F688F2651C5621380080F53C /* BatteryView.h */,
+				F688F2661C5621380080F53C /* BatteryView.m */,
+				F688F27E1C56754A0080F53C /* TargetView.h */,
+				F688F27F1C56754A0080F53C /* TargetView.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		F604E8C41C52907200C3A223 /* TableCells */ = {
+			isa = PBXGroup;
+			children = (
+				F604E8C51C52908B00C3A223 /* DroneTableViewCell.h */,
+				F604E8C61C52908B00C3A223 /* DroneTableViewCell.m */,
+			);
+			name = TableCells;
+			sourceTree = "<group>";
+		};
+		F604E8C81C52B1B000C3A223 /* StyleKit */ = {
+			isa = PBXGroup;
+			children = (
+				F688F27C1C5674DB0080F53C /* StyleKit.h */,
+				F688F27B1C5674DB0080F53C /* StyleKit.m */,
+			);
+			name = StyleKit;
+			sourceTree = "<group>";
+		};
 		F65B918C1C2329A300380DDB = {
 			isa = PBXGroup;
 			children = (
@@ -193,10 +250,10 @@
 				F6C524621C49080800FE9C30 /* Models */,
 				F65D92451C31945F0062ED34 /* Annotations */,
 				F6C627781C3052EF0049989E /* Controllers */,
+				F604E8C31C52906D00C3A223 /* Views */,
+				F604E8C81C52B1B000C3A223 /* StyleKit */,
 				F65B919B1C2329A300380DDB /* AppDelegate.h */,
 				F65B919C1C2329A300380DDB /* AppDelegate.m */,
-				F65D92491C31981E0062ED34 /* DrawUtils.h */,
-				F65D924A1C31981E0062ED34 /* DrawUtils.m */,
 				F65B91A11C2329A300380DDB /* Main.storyboard */,
 				F65B91A41C2329A300380DDB /* Assets.xcassets */,
 				F65B91A61C2329A300380DDB /* LaunchScreen.storyboard */,
@@ -309,6 +366,10 @@
 				F6A876211C4FFE5E0012F032 /* NSDate+JSON.m */,
 				F6C5247D1C4944CB00FE9C30 /* NSDictionary+Safe.h */,
 				F6C5247E1C4944CB00FE9C30 /* NSDictionary+Safe.m */,
+				F688F26B1C5627F20080F53C /* UIImage+Drone.h */,
+				F688F26C1C5627F20080F53C /* UIImage+Drone.m */,
+				F688F2781C566EC00080F53C /* NSDate+Utils.h */,
+				F688F2791C566EC00080F53C /* NSDate+Utils.m */,
 			);
 			name = Extansions;
 			sourceTree = "<group>";
@@ -320,6 +381,14 @@
 				F6C6277A1C3053010049989E /* MapViewController.m */,
 				F6A8762F1C50439F0012F032 /* SettingsViewController.h */,
 				F6A876301C50439F0012F032 /* SettingsViewController.m */,
+				F688F2681C5626DF0080F53C /* DroneTableViewController.h */,
+				F688F2691C5626DF0080F53C /* DroneTableViewController.m */,
+				F688F2721C565BE80080F53C /* DroneDetailsViewController.h */,
+				F688F2731C565BE80080F53C /* DroneDetailsViewController.m */,
+				F688F2751C566CC80080F53C /* TasksTableViewController.h */,
+				F688F2761C566CC80080F53C /* TasksTableViewController.m */,
+				F688F2811C5681DA0080F53C /* AddTaskViewController.h */,
+				F688F2821C5681DA0080F53C /* AddTaskViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -489,26 +558,35 @@
 				F6A8761F1C4FFD050012F032 /* RouteParser.m in Sources */,
 				F6C5247F1C4944CB00FE9C30 /* NSDictionary+Safe.m in Sources */,
 				F6A876281C4FFF7B0012F032 /* SensorValueParser.m in Sources */,
+				F688F2771C566CC80080F53C /* TasksTableViewController.m in Sources */,
 				F6A876191C4FE2830012F032 /* SensorValue.m in Sources */,
 				F65B919D1C2329A300380DDB /* AppDelegate.m in Sources */,
 				F65B919A1C2329A300380DDB /* main.m in Sources */,
 				F6A876101C4FDD710012F032 /* Drone.m in Sources */,
 				F6A8761C1C4FFA010012F032 /* DroneParser.m in Sources */,
 				F6A8760C1C4FDA5C0012F032 /* SettingsManager.m in Sources */,
+				F688F26D1C5627F20080F53C /* UIImage+Drone.m in Sources */,
+				F688F27D1C5674DB0080F53C /* StyleKit.m in Sources */,
 				F6A876161C4FE2000012F032 /* Sensor.m in Sources */,
 				F65D92481C3194930062ED34 /* DroneAnnotation.m in Sources */,
 				F6A876251C4FFEF70012F032 /* SensorParser.m in Sources */,
 				F6A8762B1C5000400012F032 /* Command.m in Sources */,
+				F688F2801C56754A0080F53C /* TargetView.m in Sources */,
 				F6C524821C49453200FE9C30 /* CommonParser.m in Sources */,
+				F688F26A1C5626DF0080F53C /* DroneTableViewController.m in Sources */,
 				F618E2351C5122DC00418EF0 /* CommandAnnotation.m in Sources */,
 				F6C524771C493DD000FE9C30 /* BaseParser.m in Sources */,
 				F6C524651C49082100FE9C30 /* MonitoringObject.m in Sources */,
+				F604E8C71C52908B00C3A223 /* DroneTableViewCell.m in Sources */,
+				F688F2671C5621380080F53C /* BatteryView.m in Sources */,
+				F688F2831C5681DA0080F53C /* AddTaskViewController.m in Sources */,
 				F6A628451C4D5AE9006B50FA /* CarAnnotation.m in Sources */,
+				F688F2741C565BE80080F53C /* DroneDetailsViewController.m in Sources */,
+				F688F27A1C566EC00080F53C /* NSDate+Utils.m in Sources */,
 				F6C5246F1C49086100FE9C30 /* ServerManager.m in Sources */,
 				F6A876221C4FFE5E0012F032 /* NSDate+JSON.m in Sources */,
 				F6C524681C49084000FE9C30 /* BaseAnnotation.m in Sources */,
 				F6A8762E1C5000D60012F032 /* CommandParser.m in Sources */,
-				F65D924B1C31981E0062ED34 /* DrawUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

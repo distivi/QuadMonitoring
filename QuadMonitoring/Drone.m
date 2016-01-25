@@ -73,5 +73,10 @@
     return path;
 }
 
+- (NSString *)statusString
+{
+    return self.status ? @"active" : @"inactive";
+}
+
 
 @end

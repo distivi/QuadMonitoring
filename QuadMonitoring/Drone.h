@@ -31,6 +31,7 @@
 - (void)addNewSensor:(Sensor *)sensor;
 
 - (NSArray *)getRoutePath;
+- (NSString *)statusString;
 
 
 @end

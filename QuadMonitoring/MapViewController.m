@@ -9,7 +9,6 @@
 #import "MapViewController.h"
 #import <MapKit/MapKit.h>
 
-#import "DrawUtils.h"
 #import "MonitoringObject.h"
 #import "Engine.h"
 
@@ -18,9 +17,17 @@
 #import "CarAnnotation.h"
 #import "CommandAnnotation.h"
 
+#import "DroneTableViewController.h"
+
+#import "TargetView.h"
+
 // https://github.com/100grams/Moving-MKAnnotationView
 
-@interface MapViewController ()<CLLocationManagerDelegate,MonitoringObjectDelegate>
+#define kSegueDronesTable   @"dronesTable"
+
+@interface MapViewController ()<CLLocationManagerDelegate,MonitoringObjectDelegate,DroneTableViewControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate> {
+    NSArray *heightArray;
+}
 
 @property (nonatomic, strong) NSArray *testCoords;
 @property (nonatomic) NSInteger currentPositionIndex;
@@ -29,11 +36,28 @@
 
 @property (nonatomic, weak) IBOutlet MKMapView *mapView;
 @property (nonatomic, weak) IBOutlet UISwitch *followMeSwitch;
+@property (nonatomic, weak) IBOutlet UIView *defaultHeaderView;
 @property (nonatomic, weak) IBOutlet UILabel *dronesCountLabel;
 
 @property (nonatomic, strong) NSMutableArray *monitoringObjects;
-@property (nonatomic, strong) MKPolyline *routeLine;
-@property (nonatomic, strong) MKPolylineRenderer *polilineRender;
+@property (nonatomic, strong) MKPolyline *routeForNewTask;
+@property (nonatomic, strong) NSMutableArray *coordsArrayForNewTask;
+
+@property (nonatomic, weak) IBOutlet UIView *backgroundForSideMenuView;
+
+
+// this menu show up from left side
+@property (nonatomic, weak) IBOutlet UIView *droneSideMenu;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *droneSideMenuLeftConstraint;
+
+// add task mode views
+@property (nonatomic, weak) IBOutlet UIView *addTaskHeaderView;
+@property (nonatomic, weak) IBOutlet UIPickerView *heightPickerView;
+@property (nonatomic, weak) IBOutlet TargetView *targetView;
+@property (nonatomic, weak) IBOutlet UIButton *undoTaskButton;
+
+// popup controllers
+@property (nonatomic, weak) DroneTableViewController *dronesController;
 
 @end
 
@@ -43,18 +67,28 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setupLocationManager];
+    [self setupSideMenus];
+    
+    [self updateUIForDefaultMode];
+    
+    heightArray = @[@"0",@"50",@"100",@"150",@"200",@"250",@"300",@"350",@"400",@"450",@"500"];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     
+    [self.droneSideMenu updateConstraintsIfNeeded];
+    
     [self setupMonitoringObjects];
+    
+    [self subscribeForNotifications:YES];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
     [self.monitoringObjects makeObjectsPerformSelector:@selector(stopMonitoring)];
+    [self subscribeForNotifications:NO];
     [super viewDidDisappear:animated];
 }
 
@@ -75,28 +109,7 @@
 {
     self.monitoringObjects = [NSMutableArray array];
     
-    [[[Engine sharedEngine] dataManager] getDronesWithCallback:^(BOOL success, id result) {
-        if (success) {
-            BOOL isFirst = YES;
-            for (Drone *dron in result) {
-                MonitoringObject *mo = [[MonitoringObject alloc] initWithDrone:dron];
-                if (![self.monitoringObjects containsObject:mo]) {
-                    [self.monitoringObjects addObject:mo];
-                    mo.delegate = self;
-                    
-                    if (isFirst) {
-                        [mo startMonitoring];
-                        isFirst = NO;
-                    }
-                    
-                    
-                    [self.mapView addAnnotation:mo.annotation];
-                }
-            }
-            
-            self.dronesCountLabel.text = [NSString stringWithFormat:@"Drones: %zd",self.monitoringObjects.count];
-        }
-    }];    
+    [self updateDrones:nil];
 }
 
 
@@ -112,6 +125,66 @@
     }
     
     [self.locationManager startUpdatingLocation];
+}
+
+- (void)setupSideMenus
+{
+    self.backgroundForSideMenuView.alpha = 0.0;
+    
+    self.droneSideMenu.layer.masksToBounds = NO;
+    self.droneSideMenu.layer.shadowOffset = CGSizeMake(3, 0);
+    self.droneSideMenu.layer.shadowRadius = 10;
+    self.droneSideMenu.layer.shadowOpacity = 0.5;
+    self.droneSideMenu.layer.cornerRadius = 2.0;
+    
+    self.droneSideMenu.hidden = YES;
+    self.droneSideMenuLeftConstraint.constant = -CGRectGetWidth(self.droneSideMenu.bounds);
+    [self.view layoutIfNeeded];
+}
+
+- (void)updateUIForDefaultMode
+{
+    self.addTaskHeaderView.hidden =
+    self.targetView.hidden =
+    self.heightPickerView.hidden = YES;
+    
+    self.defaultHeaderView.hidden = NO;
+}
+
+- (void)updateUIForAddTaskMode
+{
+    self.addTaskHeaderView.hidden =
+    self.targetView.hidden =
+    self.heightPickerView.hidden = NO;
+    
+    self.defaultHeaderView.hidden = YES;
+    self.undoTaskButton.hidden = YES;
+}
+
+#pragma mark - Animations
+
+- (void)showDroneMenu
+{
+    self.dronesController.drones = [self.monitoringObjects valueForKey:@"drone"];
+    self.droneSideMenu.hidden = NO;
+    [UIView animateWithDuration:0.5 animations:^{
+        self.backgroundForSideMenuView.alpha = 1.0;
+        self.droneSideMenuLeftConstraint.constant = 0.0;
+        [self.view layoutIfNeeded];
+    }];
+}
+
+- (void)hideDroneMenu
+{
+    [UIView animateWithDuration:0.5 animations:^{
+        self.backgroundForSideMenuView.alpha = 0.0;
+        self.droneSideMenuLeftConstraint.constant = -CGRectGetWidth(self.droneSideMenu.bounds);
+        [self.view layoutIfNeeded];
+    } completion:^(BOOL finished) {
+        if (finished) {
+            self.droneSideMenu.hidden = YES;
+        }
+    }];
 }
 
 #pragma mark - Move
@@ -148,9 +221,36 @@
     [self.mapView setUserTrackingMode:sender.isOn ? MKUserTrackingModeFollow : MKUserTrackingModeNone];
 }
 
+- (IBAction)droneMenuButtonTaped:(UIButton *)sender {
+    [self showDroneMenu];
+}
+
+- (IBAction)backgroundForSideMenuTaped:(UITapGestureRecognizer *)sender {
+    if (!self.droneSideMenu.hidden) {
+        CGPoint location = [sender locationInView:self.view];
+        if (!CGRectContainsPoint(self.droneSideMenu.frame, location)) {
+            [self hideDroneMenu];
+        }
+    }
+}
+
 #pragma mark - Map Drawing
 
-- (void)drawLineWithLocationArray:(NSArray *)locationArray
+- (void)addPolylineForNewTask
+{
+    self.routeForNewTask = [self createPolylineWithLocationArray:self.coordsArrayForNewTask];
+    [self.mapView addOverlay:self.routeForNewTask];
+}
+
+
+- (void)drawLineForLocationArray:(NSArray *)locationArray
+{
+    MKPolyline *routeLine  = [self createPolylineWithLocationArray:locationArray];
+    [self.mapView addOverlay:routeLine];
+}
+     
+
+- (MKPolyline *)createPolylineWithLocationArray:(NSArray *)locationArray
 {
     int pointCount = [locationArray count];
     CLLocationCoordinate2D *coordinateArray = (CLLocationCoordinate2D *)malloc(pointCount * sizeof(CLLocationCoordinate2D));
@@ -160,12 +260,12 @@
         coordinateArray[i] = [location coordinate];
     }
     
-    self.routeLine = [MKPolyline polylineWithCoordinates:coordinateArray count:pointCount];
-    
-    [self.mapView addOverlay:self.routeLine];
+    MKPolyline *routeLine = [MKPolyline polylineWithCoordinates:coordinateArray count:pointCount];
     
     free(coordinateArray);
     coordinateArray = NULL;
+    
+    return routeLine;
 }
 
 
@@ -225,7 +325,14 @@
     if ([overlay isKindOfClass:MKPolyline.class]) {
 
         MKPolylineRenderer *lineView = [[MKPolylineRenderer alloc] initWithOverlay:overlay];
-        lineView.strokeColor = [UIColor redColor];
+        
+        if (overlay == self.routeForNewTask) {
+            lineView.strokeColor = [UIColor greenColor];
+//            lineView.lineDashPattern = @[@5, @3];
+            lineView.alpha = 0.6;
+        } else {
+            lineView.strokeColor = [UIColor redColor];
+        }
         
         return lineView;
     }
@@ -262,7 +369,157 @@
 
 - (void)monitoringObject:(MonitoringObject *)sender updatedRoutePath:(NSArray *)routePath
 {
-    [self drawLineWithLocationArray:routePath];
+    [self drawLineForLocationArray:routePath];
 }
+
+#pragma mark - Navigations
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:kSegueDronesTable]) {
+        UINavigationController *navigation = segue.destinationViewController;
+        self.dronesController = [[navigation viewControllers] firstObject];
+        self.dronesController.dronesDelegate = self;
+    }
+}
+
+#pragma mark - DronesTableViewControllerDelegate
+
+- (void)dronesController:(DroneTableViewController *)controller wantRefreshDronesList:(CompletitionBlock)callBack
+{
+    [self updateDrones:^(BOOL success, id result) {
+        if (callBack) {
+            if (success) {
+                NSArray *drones = [self.monitoringObjects valueForKey:@"drone"];
+                callBack(YES,drones);
+            } else {
+                callBack(NO, nil);
+            }
+        }
+    }];
+}
+
+- (void)updateDrones:(CompletitionBlock)completition
+{
+    [[[Engine sharedEngine] dataManager] getDronesWithCallback:^(BOOL success, id result) {
+        if (success) {
+            BOOL isFirst = YES;
+            for (Drone *dron in result) {
+                MonitoringObject *mo = [[MonitoringObject alloc] initWithDrone:dron];
+                if (![self.monitoringObjects containsObject:mo]) {
+                    [self.monitoringObjects addObject:mo];
+                    mo.delegate = self;
+                    
+                    if (isFirst) {
+//                        [mo startMonitoring];
+                        isFirst = NO;
+                    }
+                    
+                    
+                    [self.mapView addAnnotation:mo.annotation];
+                }
+            }
+            
+            self.dronesCountLabel.text = [NSString stringWithFormat:@"Drones: %zd",self.monitoringObjects.count];
+        }
+        
+        if (completition) {
+            completition(success,nil);
+        }
+    }];
+}
+
+#pragma mark - Notifications
+
+- (void)subscribeForNotifications:(BOOL)isSubscribe
+{
+    if (isSubscribe) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mustAddRouteForNewTaks:) name:KNotificationAddRouteForTask object:nil];
+    } else {
+        [[NSNotificationCenter defaultCenter] removeObserver:self];
+    }
+}
+
+- (void)mustAddRouteForNewTaks:(NSNotification *)notification
+{
+    [self hideDroneMenu];
+    [self updateUIForAddTaskMode];
+    
+    self.coordsArrayForNewTask = [NSMutableArray array];
+}
+
+#pragma mark - Add Route mode methods
+
+- (IBAction)undoLastTaskPosition:(id)sender
+{
+    if (self.coordsArrayForNewTask.count > 0) {
+        [self.coordsArrayForNewTask removeLastObject];
+        
+        if (self.routeForNewTask) {
+            [self.mapView removeOverlay:self.routeForNewTask];
+        }
+        
+        if (self.coordsArrayForNewTask.count > 0) {
+            [self addPolylineForNewTask];
+        } else {
+            self.undoTaskButton.hidden = YES;
+        }
+    }
+}
+
+- (IBAction)addPositionToTaskRoute:(id)sender
+{
+    CGPoint mapCenter = CGPointMake(CGRectGetMidX(self.mapView.bounds), CGRectGetMidY(self.mapView.bounds));
+    
+    CLLocationCoordinate2D coordinate = [self.mapView convertPoint:mapCenter toCoordinateFromView:self.mapView];
+    CLLocation *location = [[CLLocation alloc] initWithLatitude:coordinate.latitude longitude:coordinate.longitude];
+    
+    [self.coordsArrayForNewTask addObject:location];
+    
+    if (self.routeForNewTask) {
+        [self.mapView removeOverlay:self.routeForNewTask];
+    }
+    
+    [self addPolylineForNewTask];
+    
+    if (self.coordsArrayForNewTask.count > 0) {
+        self.undoTaskButton.hidden = NO;
+    }
+}
+
+- (IBAction)cancelNewTaskEditing:(id)sender
+{
+    [self updateUIForDefaultMode];
+    [self showDroneMenu];
+    [self removeTestOverlay];
+}
+
+- (void)removeTestOverlay
+{
+    [self.coordsArrayForNewTask removeAllObjects];
+    self.coordsArrayForNewTask = nil;
+    
+    if (self.routeForNewTask) {
+        [self.mapView removeOverlay:self.routeForNewTask];
+        self.routeForNewTask = nil;
+    };
+}
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    return [heightArray count];
+}
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    return FORMAT(@"%@ m",heightArray[row]);
+}
+
+
 
 @end

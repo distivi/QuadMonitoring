@@ -83,7 +83,7 @@
 - (void)startMonitoring
 {
     if (!self.monitoringTimer) {
-        self.monitoringTimer = [NSTimer scheduledTimerWithTimeInterval:30.0 target:self selector:@selector(getInfoFromServer:) userInfo:nil repeats:YES];
+        self.monitoringTimer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(getInfoFromServer:) userInfo:nil repeats:YES];
         [self getInfoFromServer:nil];
     }
 }
